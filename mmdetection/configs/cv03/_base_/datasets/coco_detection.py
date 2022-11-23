@@ -8,7 +8,7 @@ img_norm_cfg = dict(
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True),
-    dict(type='Resize', img_scale=(512, 512), keep_ratio=True),
+    dict(type='Resize', img_scale=(1024, 1024), keep_ratio=True),
     dict(type='RandomFlip', flip_ratio=0.5),
     dict(type='Normalize', **img_norm_cfg),
     dict(type='Pad', size_divisor=32),
@@ -19,7 +19,7 @@ test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(512, 512),
+        img_scale=(1024, 1024),
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
@@ -31,7 +31,7 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=4, # gpu 하나 당 올라갈 이미지 수
+    samples_per_gpu=8, # gpu 하나 당 올라갈 이미지 수
     workers_per_gpu=2, # gpu 하나 당 cpu코어 수
     train=dict(
         type=dataset_type,
@@ -41,7 +41,7 @@ data = dict(
         pipeline=train_pipeline),
     val=dict(
  type=dataset_type,
-        ann_file=data_root + 'custom/val.json',
+        ann_file=data_root + 'custom/valid.json',
         img_prefix=data_root,
         classes = classes,
         pipeline=test_pipeline),
