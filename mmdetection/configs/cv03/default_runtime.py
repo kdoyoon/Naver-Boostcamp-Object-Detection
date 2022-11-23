@@ -1,9 +1,22 @@
+import wandb
+
+wandb.login()
+# wandb.init(project="aistages_level2_competition", entity="level2_3")
 checkpoint_config = dict(interval=1)
 # yapf:disable
 log_config = dict(
     interval=50,
     hooks=[
-        dict(type='TextLoggerHook'),  
+        dict(type='TextLoggerHook'),
+        dict(type='WandbLoggerHook',interval=50,
+            init_kwargs=dict(
+                project='Object_Detection',
+                entity = 'aitech4_cv3',
+                name = "faster_rcnn_r50_fpn_1x_coco_defaultaug(YH)"),)
+            #     log_checkpoint=True,
+            # log_checkpoint_metadata=True,
+            # num_eval_images=100,
+            # bbox_score_thr=0.0),       
 
         # dict(type='TensorboardLoggerHook')
     ])
