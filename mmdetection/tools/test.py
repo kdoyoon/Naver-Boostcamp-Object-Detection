@@ -19,7 +19,12 @@ from mmdet.models import build_detector
 from mmdet.utils import (build_ddp, build_dp, compat_cfg, get_device,
                          replace_cfg_vals, setup_multi_processes,
                          update_data_root)
+from pycocotools.coco import COCO
+import pandas as pd
 
+
+result = 0
+r_cfg = 0
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -119,6 +124,7 @@ def parse_args():
 
 
 def main():
+    global result, r_cfg
     args = parse_args()
 
     assert args.out or args.eval or args.format_only or args.show \
@@ -237,6 +243,8 @@ def main():
         model = build_dp(model, cfg.device, device_ids=cfg.gpu_ids)
         outputs = single_gpu_test(model, data_loader, args.show, args.show_dir,
                                   args.show_score_thr)
+        result = outputs
+        r_cfg = cfg
     else:
         model = build_ddp(
             model,
@@ -273,3 +281,28 @@ def main():
 
 if __name__ == '__main__':
     main()
+    print("start!")
+    # submission 양식에 맞게 output 후처리
+    prediction_strings = []
+    file_names = []
+    coco = COCO(r_cfg.data.test.ann_file)
+    img_ids = coco.getImgIds()
+
+    class_num = 10
+    for i, out in enumerate(result):
+        prediction_string = ''
+        image_info = coco.loadImgs(coco.getImgIds(imgIds=i))[0]
+        for j in range(class_num):
+            for o in out[j]:
+                prediction_string += str(j) + ' ' + str(o[4]) + ' ' + str(o[0]) + ' ' + str(o[1]) + ' ' + str(
+                    o[2]) + ' ' + str(o[3]) + ' '
+                
+        prediction_strings.append(prediction_string)
+        file_names.append(image_info['file_name'])
+
+    submission = pd.DataFrame()
+    submission['PredictionString'] = prediction_strings
+    submission['image_id'] = file_names
+    submission.to_csv('/opt/ml/baseline/submission/submission_swinT.csv', index=None)
+    submission.head()
+    print("Done!!")
