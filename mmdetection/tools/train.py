@@ -136,7 +136,7 @@ def main():
 
     # set cudnn_benchmark
     if cfg.get('cudnn_benchmark', False):
-        torch.backends.cudnn.benchmark = True
+        torch.backends.cudnn.benchmark = False
 
     # work_dir is determined in this priority: CLI > segment in file > filename
     if args.work_dir is not None:
