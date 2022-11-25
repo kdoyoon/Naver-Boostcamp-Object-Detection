@@ -12,7 +12,6 @@ train_pipeline = [
     dict(type='RandomFlip', flip_ratio=0.5),
     dict(
         type='AutoAugment',
-         replace = (104, 116, 124)
         policies=[[
             dict(
                 type='Resize',
