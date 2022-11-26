@@ -12,12 +12,11 @@ log_config = dict(
             init_kwargs=dict(
                 project='Object_Detection',
                 entity = 'aitech4_cv3',
-                name = "shear_brightnessTransform_resize_autoaug(YH)"),)
-            #     log_checkpoint=True,
-            # log_checkpoint_metadata=True,
-            # num_eval_images=100,
-            # bbox_score_thr=0.0),       
-
+                name = "custom_auto_aug(YH)"),)
+        # log_checkpoint=True,
+        # log_checkpoint_metadata=True,
+        # num_eval_images=50,
+        # bbox_score_thr=0.1,       
         # dict(type='TensorboardLoggerHook')
     ])
 # yapf:enable
@@ -28,7 +27,7 @@ log_level = 'INFO'
 load_from = None
 resume_from = None
 workflow = [('train', 1)]
-
+#workflow = [('train', 1), ('val', 1)]
 # disable opencv multithreading to avoid system being overloaded
 opencv_num_threads = 0
 # set multi-process start method as `fork` to speed up the training

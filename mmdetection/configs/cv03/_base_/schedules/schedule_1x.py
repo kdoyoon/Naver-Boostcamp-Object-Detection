@@ -20,5 +20,5 @@ optimizer = dict(
         custom_keys={'backbone': dict(lr_mult=0.1, decay_mult=1.0)}))
 optimizer_config = dict(grad_clip=dict(max_norm=0.1, norm_type=2))
 # learning policy
-lr_config = dict(policy='step', step=[100])
-runner = dict(type='EpochBasedRunner', max_epochs=12)
+lr_config = dict(policy='step', step=[12])
+runner = dict(type='EpochBasedRunner', max_epochs=20)
