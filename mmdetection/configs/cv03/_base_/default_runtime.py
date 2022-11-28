@@ -12,7 +12,7 @@ log_config = dict(
             init_kwargs=dict(
                 project='Object_Detection',
                 entity = 'aitech4_cv3',
-                name = "atss_swin_t_fpn_dyhead_1x_coco.py(YH)"),)
+                name = "atss_swin_t_fpn_dyhead_20e_coco(YH)"),)
         # log_checkpoint=True,
         # log_checkpoint_metadata=True,
         # num_eval_images=50,
@@ -37,4 +37,4 @@ mp_start_method = 'fork'
 #   - `enable` means enable scaling LR automatically
 #       or not by default.
 #   - `base_batch_size` = (8 GPUs) x (2 samples per GPU).
-auto_scale_lr = dict(enable=False, base_batch_size=16)
+auto_scale_lr = dict(enable=True, base_batch_size=16)

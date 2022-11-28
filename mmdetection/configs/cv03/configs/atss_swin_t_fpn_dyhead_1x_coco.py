@@ -68,7 +68,7 @@ model = dict(
             type='CrossEntropyLoss', use_sigmoid=True, loss_weight=1.0)),
     # training and testing settings
     train_cfg=dict(
-        assigner=dict(type='ATSSAssigner', topk=9),
+        assigner=dict(type='ATSSAssigner', topk=5),
         allowed_border=-1,
         pos_weight=-1,
         debug=False),
@@ -76,16 +76,15 @@ model = dict(
         nms_pre=1000,
         min_bbox_size=0,
         score_thr=0.05,
-        nms=dict(type='soft_nms', iou_threshold=0.6),
+        nms=dict(type='soft_nms', iou_threshold=0.5),
         max_per_img=100))
 
 
 
-# optimizer
-optimizer_config = dict(grad_clip=dict(max_norm=0.1, norm_type=2))
+optimizer_config = dict(grad_clip=None)
 optimizer = dict(
     type='AdamW',
-    lr=0.00005,
+    lr=0.0005,
     betas=(0.9, 0.999),
     weight_decay=0.05,
     paramwise_cfg=dict(
@@ -101,5 +100,6 @@ lr_config = dict(
     warmup='linear',
     warmup_iters=500,
     warmup_ratio=0.001,
-    step=[8, 11])
-runner = dict(type='EpochBasedRunner', max_epochs=12)
+    step=[10, 14])
+
+runner = dict(type='EpochBasedRunner', max_epochs=15)

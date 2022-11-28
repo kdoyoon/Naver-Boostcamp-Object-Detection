@@ -85,7 +85,7 @@ test_pipeline = [
 #     )
 
 data = dict(
-    samples_per_gpu=4, # gpu 하나 당 올라갈 이미지 수
+    samples_per_gpu=2, # gpu 하나 당 올라갈 이미지 수
     workers_per_gpu=2, # gpu 하나 당 cpu코어 수
     train=dict(
         type=dataset_type,
