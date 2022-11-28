@@ -1159,7 +1159,7 @@ class MinIoURandomCrop:
         `gt_bboxes` corresponds to `gt_labels` and `gt_masks`, and \
         `gt_bboxes_ignore` to `gt_labels_ignore` and `gt_masks_ignore`.
     """
-
+ 
     def __init__(self,
                  min_ious=(0.1, 0.3, 0.5, 0.7, 0.9),
                  min_crop_size=0.3,
