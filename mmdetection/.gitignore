@@ -123,6 +123,11 @@ work_dirs/
 *.py~
 *.sh~
 
+<<<<<<< HEAD
 wandb/
 work_dirs/
 artifacts
+=======
+
+wandb/
+>>>>>>> 1cfaeb01051a0c98f4822478d1467f1d29334eaf

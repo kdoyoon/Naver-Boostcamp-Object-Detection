@@ -303,6 +303,6 @@ if __name__ == '__main__':
     submission = pd.DataFrame()
     submission['PredictionString'] = prediction_strings
     submission['image_id'] = file_names
-    submission.to_csv('/opt/ml/baseline/submission/submission_swinT.csv', index=None)
+    submission.to_csv('/opt/ml/submission/custom.csv', index=None)
     submission.head()
     print("Done!!")
