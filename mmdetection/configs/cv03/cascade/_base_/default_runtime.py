@@ -11,25 +11,12 @@ checkpoint_config = dict(interval=1)
 log_config = dict(
     interval=50,
     hooks=[
-<<<<<<< HEAD:mmdetection/configs/cv03/cascade/_base_/default_runtime.py
         dict(type='TextLoggerHook'),  
         dict(type='WandbLoggerHook',interval=10,
             init_kwargs=dict(
                 project='Object_Detection',
                 entity = 'aitech4_cv3',
                 name = "cascade_swin-B_adamW_tta"),)
-=======
-        dict(type='TextLoggerHook'),
-        dict(type='WandbLoggerHook',interval=50,
-            init_kwargs=dict(
-                project='Object_Detection',
-                entity = 'aitech4_cv3',
-                name = "atss_swin_t_fpn_dyhead_20e_coco(YH)"),)
-        # log_checkpoint=True,
-        # log_checkpoint_metadata=True,
-        # num_eval_images=50,
-        # bbox_score_thr=0.1,       
->>>>>>> b2855873ead6b8dd8a18aa2961c05423c430bfdd:mmdetection/configs/cv03/_base_/default_runtime.py
         # dict(type='TensorboardLoggerHook')
     ])
 # yapf:enable
