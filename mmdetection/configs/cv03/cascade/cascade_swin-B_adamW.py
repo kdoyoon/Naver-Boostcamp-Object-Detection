@@ -16,7 +16,7 @@ model = dict(
         depths=[2, 2, 18, 2],
         num_heads=[4, 8, 16, 32],
         window_size=7,
-mlp_ratio=4,
+        mlp_ratio=4,
         qkv_bias=True,
         qk_scale=None,
         drop_rate=0.,
@@ -28,6 +28,7 @@ mlp_ratio=4,
         convert_weights=True,
         init_cfg=dict(type='Pretrained', checkpoint=pretrained)),
     neck=dict(in_channels=[128, 256, 512, 1024]))
+
 
 optimizer = dict(
     _delete_=True,
