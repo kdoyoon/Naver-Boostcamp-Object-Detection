@@ -6,7 +6,10 @@ img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 
 image_scale = [(256, 256), (512, 512), (768, 768), (1024, 1024)]
-albu_train_transforms = [
+
+albu_train_transforms = [ 
+    dict(type='HorizontalFlip',p=0.5),
+    dict(type='VerticalFlip',p=0.5),
     dict(
         type='OneOf',
         transforms=[
@@ -16,21 +19,21 @@ albu_train_transforms = [
                 scale_limit=0.0,
                 rotate_limit=0.0,
                 border_mode=cv2.BORDER_CONSTANT,
-                p=0.5),
+                p=1),
             dict(
                 type='ShiftScaleRotate',
                 shift_limit=0.0,
                 scale_limit=0.2,
                 rotate_limit=0.0,
                 border_mode=cv2.BORDER_CONSTANT,
-                p=0.5),
+                p=1),
             dict(
                 type='ShiftScaleRotate',
                 shift_limit=0.0,
                 scale_limit=0.0,
                 rotate_limit=30,
                 border_mode=cv2.BORDER_CONSTANT,
-                p=0.5),
+                p=1),
         ],
         p=0.1),
     dict(
@@ -59,21 +62,20 @@ albu_train_transforms = [
                 type='RandomBrightnessContrast',
                 brightness_limit=[0.1, 0.3],
                 contrast_limit=[0.1, 0.3],
-                p=0.2),
-            dict(type='ChannelShuffle', p=0.1)
+                p=1.0),
         ],
         p=0.1),
+    dict(type='ChannelShuffle', p=0.1),
 ]
 
+img_norm_cfg = dict(
+    mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True),
-    dict(type='Resize', 
-         img_scale=image_scale,
-         multiscale_mode='value',
-         keep_ratio=True),
-    dict(type='RandomFlip', flip_ratio=0.5),
-    dict(type='Pad', size_divisor=32),
+    dict(type='Resize', img_scale = image_scale, multiscale_mode='value',
+        keep_ratio=True),
+    dict(type='RandomFlip', flip_ratio=0.0),
     dict(
         type='Albu',
         transforms=albu_train_transforms,
@@ -91,13 +93,13 @@ train_pipeline = [
         update_pad_shape=False,
         skip_img_without_anno=True),
     dict(type='Normalize', **img_norm_cfg),
+    dict(type='Pad', size_divisor=32),
     dict(type='DefaultFormatBundle'),
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
 ]
-
 test_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(
+dict(
         type='MultiScaleFlipAug',
         img_scale=image_scale,
         flip=False,
@@ -122,13 +124,13 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
-        ann_file=data_root + 'train_2.json',
+        ann_file='/opt/ml/k-dataset/train1.json',
         img_prefix=data_root,
         classes=classes,
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'valid_2.json',
+        ann_file='/opt/ml/k-dataset/valid1.json',
         img_prefix=data_root,
         classes=classes,
         pipeline=test_pipeline),

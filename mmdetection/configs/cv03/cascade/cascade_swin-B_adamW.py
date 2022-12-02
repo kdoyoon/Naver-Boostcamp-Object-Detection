@@ -1,8 +1,8 @@
 _base_ = [
     './_base_/models/cascade_rcnn_r50_fpn.py',
-    './_base_/datasets/coco_detection4(valid).py',
+    './_base_/datasets/coco_detection.py',
     './_base_/schedules/schedule_2x.py',
-    './_base_/default_runtime4(valid).py'
+    './_base_/default_runtime.py'
 ]
 
 pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window7_224_22k.pth'  # noqa

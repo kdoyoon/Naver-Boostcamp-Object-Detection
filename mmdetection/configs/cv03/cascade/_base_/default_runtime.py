@@ -11,7 +11,7 @@ log_config = dict(
             init_kwargs=dict(
                 project='Object_Detection',
                 entity = 'aitech4_cv3',
-                name = "cascade_swin-B_adamW_tta"),)
+                name = "cascade_swin-B_adamW_tta(k0)"),)
         # dict(type='TensorboardLoggerHook')
     ])
 # yapf:enable
