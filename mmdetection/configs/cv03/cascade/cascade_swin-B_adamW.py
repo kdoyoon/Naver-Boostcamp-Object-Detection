@@ -1,8 +1,8 @@
 _base_ = [
     './_base_/models/cascade_rcnn_r50_fpn.py',
-    './_base_/datasets/coco_detection4(valid).py',
-    './_base_/schedules/schedule_2x.py',
-    './_base_/default_runtime4(valid).py'
+    '/opt/ml/ob/level2_objectdetection_cv-level2-cv-03/mmdetection/configs/cv03/atts_swin_dyhead_fpn/_base_/datasets/coco_detection_custom.py',
+    './_base_/schedules/schedule_1x_Adam.py',
+    './_base_/default_runtime.py'
 ]
 
 pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window7_224_22k.pth'  # noqa
@@ -16,7 +16,7 @@ model = dict(
         depths=[2, 2, 18, 2],
         num_heads=[4, 8, 16, 32],
         window_size=7,
-mlp_ratio=4,
+        mlp_ratio=4,
         qkv_bias=True,
         qk_scale=None,
         drop_rate=0.,
@@ -28,6 +28,7 @@ mlp_ratio=4,
         convert_weights=True,
         init_cfg=dict(type='Pretrained', checkpoint=pretrained)),
     neck=dict(in_channels=[128, 256, 512, 1024]))
+
 
 optimizer = dict(
     _delete_=True,
