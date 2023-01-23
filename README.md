@@ -9,7 +9,8 @@
 # Members
 - **김도윤**  : 2 stage model(detector, feature extractor  위주의  실험  진행_faster, cascade, htc, etc.), ensemble(WBF),   
 Hyperparameter tuning 
-- **김윤호**  : Augmentation(Auto-augmentation, Mosaic, Multi-Scale)  실험, 2stage model(ATSS-Dyhead, cascade rcnn), StratifiedGroupKfold 구현
+- **김윤호**  : Augmentation(Auto-augmentation, Mosaic, Multi-Scale)  실험, 2stage model(ATSS-Dyhead, cascade rcnn),   
+StratifiedGroupKfold 구현
 - **김종해**  : 1 stage model (RetinaNet, yolov7)  실험, StratifiedGroupKfold  구현, WBF실험
 - **조재효**  : Augmentation(TTA, albumentation), 1stage model (yolov7), 2 stage model(cascade_swin_b),    
 hyperparameter tuning, k-fold, ensemble(WBF)
