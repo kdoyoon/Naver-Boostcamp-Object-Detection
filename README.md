@@ -9,8 +9,7 @@
 # Members
 - **김도윤**  : 2 stage model(detector, feature extractor  위주의  실험  진행_faster, cascade, htc, etc.), ensemble(WBF),   
 Hyperparameter tuning 
-- **김윤호**  : Augmentation(Auto-augmentation, Mosaic, Multi-Scale)  실험, 2stage model(ATSS-Dyhead, cascade rcnn),    
-StratifiedGroupKfold 구현
+- **김윤호**  : Augmentation(Auto-augmentation, Mosaic, Multi-Scale)  실험, 2stage model(ATSS-Dyhead, cascade rcnn), StratifiedGroupKfold 구현
 - **김종해**  : 1 stage model (RetinaNet, yolov7)  실험, StratifiedGroupKfold  구현, WBF실험
 - **조재효**  : Augmentation(TTA, albumentation), 1stage model (yolov7), 2 stage model(cascade_swin_b),    
 hyperparameter tuning, k-fold, ensemble(WBF)
@@ -68,24 +67,26 @@ hyperparameter tuning, k-fold, ensemble(WBF)
 
 # 문제정의
 <h3> 1. 데이터의 불균형   </h3>  
+<img width="850" alt="image" src="https://user-images.githubusercontent.com/93971443/213986454-de1e2d96-6e74-40ed-95ab-a7a333b06dc3.png">
 
+- EDA 결과 심한 data 불균형 관찰됨
+- 적은 label을 제대로 detect 하지 못할 경우 key problem 설정 후 이를 정복하는 방식으로 접근
+<h3> 2. 균일한 Valid Dataset 구성   </h3>
 
-<h3> 2. 데이터 라벨의 불규칙   </h3>  
+- 한 이미지 내에 여러 클래스의 annotation이 존재하여 일반적인 data split으로 접근하면 안됨
+- Stratified Group K-fold를 활용하여 균일한 validation set 구성
 
-
-&nbsp;
-
-# 모델 및 Data Augmentation
 
 &nbsp;
 
 # Advanced Techniques
-<h3> 1. Pseudo Labeling   </h3>  
 
+<h3> 1. Model Ensemble   </h3>  
 
-
-<h3> 2. Model Ensemble   </h3>  
-
+- WBF(Weighted Box Fusion)
+	- bbox가 너무 많이 그려져 결과를 분석하는데 어려움을 겪음
+	- soft-nms 사용하여 성능 향상을 이끌어내었으나 nms 방식은 bbox를 일부 제거하므로 정보 손실이 불가피하였음
+	- 여러 개의 bbox를 앙상블하는 WBF를 사용하여 정보 손실을 최소화하였고 큰 성능 향상을 이끌어 냄
 
 
 # Reference
